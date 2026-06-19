@@ -35,7 +35,7 @@ return [
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'database' => env('DB_DATABASE', '/tmp/database.sqlite'),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
             'busy_timeout' => null,
@@ -44,7 +44,8 @@ return [
             'transaction_mode' => 'DEFERRED',
             'options' => [
                 // Ensure SQLite file is created if it doesn't exist (Vercel serverless)
-                \PDO::SQLITE_OPEN_CREATE => true,
+                // Use Pdo\Sqlite::OPEN_CREATE for PHP 8.5+ compatibility
+                defined('Pdo\Sqlite::OPEN_CREATE') ? Pdo\Sqlite::OPEN_CREATE : \PDO::SQLITE_OPEN_CREATE,
             ],
         ],
 

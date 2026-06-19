@@ -5,15 +5,18 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 
-// Ensure SQLite database file exists (important for Vercel serverless)
-$databasePath = __DIR__ . '/../database/database.sqlite';
-if (!file_exists($databasePath)) {
-    $dir = dirname($databasePath);
-    if (!is_dir($dir)) {
-        mkdir($dir, 0755, true);
-    }
-    touch($databasePath);
+// Ensure SQLite database file exists in writable directory (Vercel serverless uses /tmp)
+$databasePath = '/tmp/database.sqlite';
+$tmpDir = dirname($databasePath);
+if (!is_dir($tmpDir)) {
+    @mkdir($tmpDir, 0755, true);
 }
+if (!file_exists($databasePath)) {
+    @touch($databasePath);
+}
+
+// Override database path for SQLite
+putenv("DB_DATABASE=$databasePath");
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
