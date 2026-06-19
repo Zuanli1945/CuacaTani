@@ -20,6 +20,13 @@ Laravel 11 app untuk petani. Fitur utama:
 - Controller hanya: validasi → panggil Service → return view/response
 - Selalu gunakan `$request->validated()` setelah `FormRequest`
 - Nama variabel: camelCase, nama tabel: snake_case
+- **Never fabricate functions/APIs.** Jika ragu, tambahkan komentar `// unverified` dan beri tahu.
+- **DRY:** Ekstrak logika berulang ke fungsi bernama yang bisa dipakai ulang. Satu fungsi satu tugas.
+- **Pilih algoritma yang tepat.** Tulis Big-O untuk logika non-sepele.
+- **Tulis kode idiomatis dan mudah dibaca** — tidak perlu over-engineering.
+- **Selalu verifikasi contoh output** dengan menelusuri logika sebelum menuliskannya.
+- **Patuhi constraint dengan ketat.** Jika tidak bisa, katakan — jangan diam-diam mencari jalan alternatif.
+- **Jika perintah ambigu, tanya dulu.**
 
 ---
 

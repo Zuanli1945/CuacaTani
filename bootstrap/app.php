@@ -5,9 +5,20 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 
+// Ensure SQLite database file exists (important for Vercel serverless)
+$databasePath = __DIR__ . '/../database/database.sqlite';
+if (!file_exists($databasePath)) {
+    $dir = dirname($databasePath);
+    if (!is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
+    touch($databasePath);
+}
+
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
+        api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )

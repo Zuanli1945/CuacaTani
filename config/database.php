@@ -42,6 +42,10 @@ return [
             'journal_mode' => null,
             'synchronous' => null,
             'transaction_mode' => 'DEFERRED',
+            'options' => [
+                // Ensure SQLite file is created if it doesn't exist (Vercel serverless)
+                \PDO::SQLITE_OPEN_CREATE => true,
+            ],
         ],
 
         'mysql' => [

@@ -36,7 +36,7 @@ return [
     ],
 
     'openweather' => [
-        'key' => env('OWM_API_KEY'),
+        'key' => env('OWM_API_KEY', 'masukan api key'),
         'url' => env('OWM_BASE_URL', 'https://api.openweathermap.org/data/2.5'),
     ],
 
