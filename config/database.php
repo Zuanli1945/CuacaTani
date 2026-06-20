@@ -42,11 +42,6 @@ return [
             'journal_mode' => null,
             'synchronous' => null,
             'transaction_mode' => 'DEFERRED',
-            'options' => [
-                // Ensure SQLite file is created if it doesn't exist (Vercel serverless)
-                // Use Pdo\Sqlite::OPEN_CREATE for PHP 8.5+ compatibility
-                defined('Pdo\Sqlite::OPEN_CREATE') ? Pdo\Sqlite::OPEN_CREATE : \PDO::SQLITE_OPEN_CREATE,
-            ],
         ],
 
         'mysql' => [
